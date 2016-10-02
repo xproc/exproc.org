@@ -62,9 +62,8 @@
 <!-- ============================================================ -->
 
 <xsl:template match="db:article[@xml:id]">
-  <xsl:comment>
-    <xsl:text>#include virtual="/include/header.html"</xsl:text>
-  </xsl:comment>
+  <xsl:variable name="header" select="doc('../include/header.html')"/>
+  <xsl:apply-templates select="$header" mode="to-xhtml"/>
 
   <xsl:if test="not($sitemenu//h:li[@id = current()/@xml:id])">
     <xsl:message terminate="yes">
@@ -73,11 +72,10 @@
     </xsl:message>
   </xsl:if>
 
-  <xsl:comment>
-    <xsl:text>#include virtual="/menus/</xsl:text>
-    <xsl:value-of select="@xml:id"/>
-    <xsl:text>.html"</xsl:text>
-  </xsl:comment>
+  <xsl:variable name="menu"
+                select="concat('../menus/', @xml:id, '.html')"/>
+
+  <xsl:apply-templates select="doc($menu)" mode="to-xhtml"/>
 
   <article class="{local-name(.)}">
     <h1>
@@ -113,6 +111,16 @@
       </xsl:if>
     </footer>
   </article>
+</xsl:template>
+
+<xsl:template match="element()" mode="to-xhtml">
+  <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
+    <xsl:apply-templates select="@*,node()" mode="to-xhtml"/>
+  </xsl:element>
+</xsl:template>
+
+<xsl:template match="attribute()|text()|comment()|processing-instruction()" mode="to-xhtml">
+  <xsl:copy/>
 </xsl:template>
 
 <!-- ============================================================ -->
