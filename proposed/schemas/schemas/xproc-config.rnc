@@ -1,0 +1,143 @@
+default namespace local = ""
+namespace pxpc = "http://exproc.org/proposed/schemas/xproc-config"
+
+xmlid.attr = attribute xml:id { xsd:ID }
+xmlbase.attr = attribute xml:base { xsd:anyURI }
+
+common.attributes = xmlid.attr?, xmlbase.attr?, extension.attr*
+
+# ============================================================
+
+start = XProcConfiguration | NotXPC
+
+# ============================================================
+
+XProcConfiguration =
+   element pxpc:xproc-config {
+      common.attributes,
+      (NotXPC|XPCConfig)*
+   }
+
+NotXPC =
+   element (* - pxpc:*) {
+      (_any.attr | text | Any)*
+   }
+
+XPCConfig =
+   XPCSchema | XPCBinding | XPCEntityResolver
+ | XPCInput | XPCLibrary | XPCOutput | XPCOption | XPCWithParam
+ | SSStepName | XPCURIResolver | XPCPipeline | XPCSerialization
+
+XPCSchema =
+   element pxpc:schema-aware {
+      common.attributes,
+      xsd:boolean
+   }
+   
+XPCBinding =
+   element pxpc:namespace-binding {
+      common.attributes,
+      attribute prefix { text },
+      attribute uri { xsd:anyURI },
+      empty
+   }
+
+XPCEntityResolver =
+   element pxpc:entity-resolver {
+      common.attributes,
+      attribute class-name { xsd:NMTOKEN },
+      empty
+   }
+
+XPCInput =
+   element pxpc:input {
+      common.attributes,
+      attribute exclude-inline-prefixes { xsd:NMTOKENS }?,
+      attribute port { xsd:NMTOKEN },
+      attribute href { xsd:anyURI }?,
+      Any?
+   }
+
+XPCLibrary =
+   element pxpc:library {
+      common.attributes,
+      attribute exclude-inline-prefixes { xsd:NMTOKENS }?,
+      attribute href { xsd:anyURI }?,
+      Any?
+   }
+
+XPCOutput =
+   element pxpc:output {
+      common.attributes,
+      attribute port { xsd:NMTOKEN },
+      attribute href { xsd:anyURI },
+      empty
+   }
+
+XPCOption =
+   element pxpc:with-option {
+      common.attributes,
+      attribute name { xsd:QName },
+      attribute value { text }?
+   }
+
+XPCWithParam =
+   element pxpc:with-param {
+      common.attributes,
+      attribute port { xsd:NMTOKEN }?,
+      attribute name { xsd:QName },
+      attribute value { text }?
+   }
+
+SSStepName =
+   element pxpc:step-name {
+      common.attributes,
+      xsd:NMTOKEN
+   }
+
+XPCURIResolver =
+   element pxpc:uri-resolver {
+      common.attributes,
+      attribute class-name { xsd:NMTOKEN },
+      empty
+   }
+
+XPCPipeline =
+   element pxpc:pipeline {
+      common.attributes,
+      attribute exclude-inline-prefixes { xsd:NMTOKENS }?,
+      attribute href { xsd:anyURI }?,
+      Any?
+   }
+
+XPCSerialization =
+   element pxpc:serialization {
+      attribute byte-order-mark { xsd:boolean }?,
+      attribute cdata-section-elements { xsd:NMTOKENS }?,
+      attribute doctype-public { text }?,
+      attribute doctype-system { text }?,
+      attribute encoding { text }?,
+      attribute escape-uri-attributes { xsd:boolean }?,
+      attribute include-content-type { xsd:boolean }?,
+      attribute indent { xsd:boolean }?,
+      attribute media-type { text }?,
+      attribute method { xsd:QName }?,
+      attribute normalization-form { 'NFC'|'NFD'|'NFKC'|'NFKD'|'fully-normalized'|'none'|xsd:NMTOKEN }?,
+      attribute omit-xml-declaration { xsd:boolean }?,
+      attribute standalone { "true" | "false" | "omit" }?,
+      attribute undeclare-prefixes { xsd:boolean }?,
+      attribute version { text }?,
+   }
+
+# ============================================================
+
+_any.attr =
+   attribute * { text }
+
+extension.attr =
+   attribute (* - (local:*|xml:*)) { text }
+
+Any =
+   element * {
+      (_any.attr | text | Any)*
+   }

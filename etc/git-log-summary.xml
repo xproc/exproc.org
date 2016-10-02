@@ -1,0 +1,96 @@
+<git-repo-info xmlns='http://nwalsh.com/ns/git-repo-info' root='/home/travis/build/xproc/exproc.org/'>
+<commit>
+<hash>6d4cb3fb2b4360e4e94ea0c020d184488e84e1b7</hash>
+<date>2016-10-02T16:20:28-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Merge pull request #2 from ndw/master</message>
+</commit>
+
+<commit>
+<hash>6342c048ece1fc8471589d7f0244cb3be2b2e4f5</hash>
+<file>.gitignore</file>
+<date>2016-10-02T16:20:07-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Added .gitignore</message>
+</commit>
+
+<commit>
+<hash>a4313d6dc12b6c3be2c06a08ae9c552c55b61db7</hash>
+<date>2016-10-02T16:16:37-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Merge pull request #1 from ndw/master</message>
+</commit>
+
+<commit>
+<hash>9dc4bf6964d5f2b45e7920aa316de02058a54875</hash>
+<file>.travis.yml</file>
+<file>.travis/publish-docs.sh</file>
+<date>2016-10-02T16:03:57-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>First attempt to run Travis CI</message>
+</commit>
+
+<commit>
+<hash>299d5862a090835653c80466272440eadc235ab7</hash>
+<file>style/webpage.xsl</file>
+<date>2016-10-02T16:01:16-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Replace Apache httpd virtual directives</message>
+</commit>
+
+<commit>
+<hash>06d57e2a0ca1a4186cca4b53205d116c9df15032</hash>
+<file>accepted/index.xml</file>
+<file>bin/git-log-summary</file>
+<file>build.gradle</file>
+<file>contact/index.xml</file>
+<file>css/docbook.css</file>
+<file>css/spec.css</file>
+<file>css/tabs.css</file>
+<file>css/website.css</file>
+<file>etc/menu.xml</file>
+<file>gradle.properties</file>
+<file>graphics/icon.ico</file>
+<file>graphics/icon.png</file>
+<file>graphics/tl_999.gif</file>
+<file>graphics/tr_999.gif</file>
+<file>images/exproc.png</file>
+<file>images/exproc.psd</file>
+<file>include/header.html</file>
+<file>index.xml</file>
+<file>proposed/functions/README.md</file>
+<file>proposed/functions/index.xml</file>
+<file>proposed/index.xml</file>
+<file>proposed/schemas.xml</file>
+<file>proposed/schemas/index.xml</file>
+<file>proposed/schemas/schemas/document-sequence.rnc</file>
+<file>proposed/schemas/schemas/xproc-config.rnc</file>
+<file>proposed/steps/fileutils.xml</file>
+<file>proposed/steps/index.xml</file>
+<file>proposed/steps/os.xml</file>
+<file>proposed/steps/other.xml</file>
+<file>proposed/steps/schemas/ziptoc.rnc</file>
+<file>proposed/steps/zip-manifest.rnc</file>
+<file>schemas/docbook-ext.rnc</file>
+<file>style/elemsyntax.xsl</file>
+<file>style/menus.xpl</file>
+<file>style/menus.xsl</file>
+<file>style/rngsyntax.xsl</file>
+<file>style/webpage.xpl</file>
+<file>style/webpage.xsl</file>
+<file>style/xproc.xsl</file>
+<file>style/xprocns.xsl</file>
+<date>2016-10-02T15:54:07-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Initial checkin</message>
+</commit>
+
+<commit>
+<hash>17dd6ef0f1861c46727e455311c447d1bc425fa3</hash>
+<file>README.md</file>
+<date>2016-10-02T15:43:47-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Initial commit</message>
+</commit>
+
+</git-repo-info>
