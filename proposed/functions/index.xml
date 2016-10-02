@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook"
+	 xmlns:xlink="http://www.w3.org/1999/xlink"
+	 xmlns:p="http://www.w3.org/ns/xproc"
+	 xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
+	 xmlns:pxp="http://exproc.org/proposed/steps"
+	 xml:id="proposed.functions"
+         version="5.0">
+<info>
+  <title>Proposed Functions</title>
+</info>
+
+<para>This page collects proposed extension functions. Implementation welcome, but
+contents subject to change at any time.</para>
+
+<para>These steps are in the “proposed extension function namespace”, 
+<uri>http://exproc.org/proposed/functions</uri>, identified by the prefix
+“<literal>pxf</literal>”.</para>
+
+<section xml:id="cwd">
+<title>pxf:cwd()</title>
+
+<para>This function returns the “current working directory” of the processor.
+This function takes no arguments and does not depend on the context.
+This function should only be implemented by processors for which the concept
+of a “current working directory” is coherent.</para>
+
+<para>There are no standard XProc steps that change the working directory,
+so this function is likely to return the same value every time it is called.
+However, there is nothing which prevents an extension step from being defined
+which changes the current working directory, so it is not necessarily the
+case that the same value will always be returned.</para>
+
+</section>
+</article>

@@ -1,0 +1,32 @@
+<ul xmlns="http://www.w3.org/1999/xhtml">
+  <li id="home">
+    <a href="/">Home</a>
+    <ul>
+      <li><a href="/">Overview</a></li>
+      <li id="contact"><a href="/contact/">Contact us</a></li>
+    </ul>
+  </li>
+  <li id="proposed.steps">
+    <a href="/proposed/steps/">Proposed Steps</a>
+    <ul>
+      <li><a href="/proposed/steps/">Overview</a></li>
+      <li id="proposed.steps.os"><a href="/proposed/steps/os.html">OS Utils</a></li>
+      <li id="proposed.steps.file"><a href="/proposed/steps/fileutils.html">File Utils</a></li>
+      <li id="proposed.steps.other"><a href="/proposed/steps/other.html">Other Steps</a></li>
+    </ul>
+  </li>
+  <li id="proposed">
+    <a href="/proposed/">Other Proposals</a>
+    <ul>
+      <li><a href="/proposed/">Overview</a></li>
+      <li id="proposed.functions"><a href="/proposed/functions/">Functions</a></li>
+      <li id="proposed.schemas"><a href="/proposed/schemas/">Schemas</a></li>
+    </ul>
+  </li>
+  <li id="accepted">
+    <a href="/accepted/">Accepted</a>
+    <ul>
+      <li><a href="/accepted/">Overview</a></li>
+    </ul>
+  </li>
+</ul>
