@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook"
+	 xmlns:xlink="http://www.w3.org/1999/xlink"
+	 xmlns:p="http://www.w3.org/ns/xproc"
+	 xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
+	 xmlns:pxp="http://exproc.org/proposed/steps"
+	 xml:id="proposed.schemas"
+         version="5.0">
+<info>
+  <title>Proposed Extensions</title>
+</info>
+
+<para>This page collects proposed extensions. Implementation welcome, but
+contents subject to change at any time.</para>
+
+<section xml:id="config">
+<title>XProc Configuration</title>
+
+<para><uri>http://exproc.org/proposed/schemas/xproc-config</uri></para>
+
+<para>An extensible vocabulary for XProc configuration files.</para>
+
+<para>T.B.D.
+</para>
+
+<para>See <link xlink:href="schemas/xproc-config.rnc">xproc-config.rnc</link>.
+</para>
+
+<variablelist>
+<varlistentry><term>20 Nov 2008</term>
+<listitem>
+<para>Added <tag class="attribute">exclude-inline-prefixes</tag> to
+<tag>pxpc:input</tag>, <tag>pxpc:pipeline</tag>, and
+<tag>pxpc:library</tag>.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</section>
+
+<section xml:id="docseq">
+<title>Document Sequences</title>
+
+<para><uri>http://exproc.org/proposed/schemas/document-sequence</uri></para>
+
+<para>A vocabulary for describing sequences of documents in a single XML
+document.
+</para>
+
+<para>T.B.D.</para>
+
+<para>See
+<link xlink:href="schemas/document-sequence.rnc">document-sequence.rnc</link>.
+</para>
+</section>
+
+</article>

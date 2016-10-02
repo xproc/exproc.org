@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook"
+	 xmlns:xlink="http://www.w3.org/1999/xlink"
+	 xml:id="home"
+         version="5.0">
+<info>
+  <title>EXProc</title>
+</info>
+
+<para>EXProc is intended to become a community initiative to
+provide extensions for <link xlink:href="http://xproc.org/">XProc</link>,
+as <link xlink:href="http://exslt.org/">EXSLT</link> provides extensions
+for XSLT.</para>
+
+<para>Extensions are divided into two classes,
+<link xlink:href="proposed/">proposed extensions</link> and
+<link xlink:href="accepted/">accepted extensions</link>.</para>
+
+<para>Your suggestions most welcome.</para>
+
+<para>The best place to discuss XProc extensions is the
+<link xlink:href="mailto:xproc-dev@w3.org">xproc-dev</link> mailing list.
+</para>
+
+</article>

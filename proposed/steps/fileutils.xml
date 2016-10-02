@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook"
+	 xmlns:xlink="http://www.w3.org/1999/xlink"
+	 xmlns:p="http://www.w3.org/ns/xproc"
+	 xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
+	 xmlns:pxp="http://exproc.org/proposed/steps"
+	 xml:id="proposed.steps.file"
+         version="5.0">
+<info>
+  <title>Proposed File Utilities</title>
+</info>
+
+<para>This page collects proposed extension steps. Implementation welcome, but
+contents subject to change at any time.</para>
+
+<para>These steps are in the “proposed file utilities extension namespace”,
+<uri>http://exproc.org/proposed/steps/file</uri>, identified by the prefix
+“<literal>pxf</literal>”.</para>
+
+<section id="copy">
+<title>pxf:copy</title>
+
+<para>Copies a file.</para>
+
+<p:declare-step type="pxf:copy">
+  <p:output port="result" primary="false"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="target" required="true" e:type="xsd:boolean"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>The <code>pxf:copy</code> copies the file named in
+<option>href</option> to the new name specified in
+<option>target</option>.
+If the <option>target</option> is a directory, the
+step attempts to move the file into that directory, preserving its
+base name.</para>
+
+<para>If the copy is successful, the step returns a
+<tag>c:result</tag> element containing the absolute URI of the target.
+</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> does not exist or
+cannot be copied to the specified target.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>
+
+<section xml:id="delete">
+<title>pxf:delete</title>
+
+<para>Deletes a file.</para>
+
+<p:declare-step type="pxf:delete">
+  <p:output port="result" primary="false"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="recursive" select="'false'" e:type="xsd:boolean"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>The <code>pxf:delete</code> step attempts to delete the file or
+directory named in <option>href</option>.</para>
+
+<para>If the file or directory is successfully deleted, the step
+returns a <tag>c:result</tag> element containing the absolute URI of
+the deleted file.
+</para>
+
+<para>If <option>href</option> specifies a directory, it can only be
+deleted if the <option>recursive</option> option is
+<literal>true</literal> or if the directory is empty.</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> does not exist or
+cannot be deleted.</entry>
+</row>
+<row>
+<entry><code>err:FU02</code></entry>
+<entry>Occurs
+if the step attempts to delete a directory that is not
+empty and the <option>recursive</option> option is not
+<literal>true</literal>.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</section>
+</section>
+
+<section xml:id="head">
+<title>pxf:head</title>
+
+<para>Returns the first few lines of text file.</para>
+
+<p:declare-step type="pxf:head">
+  <p:output port="result"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="count" required="true" e:type="xsd:int"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>Returns the first <option>count</option> lines of the file named
+in <option>href</option>. If <option>count</option> is negative, the
+step returns all <emphasis>except</emphasis> those first lines.</para>
+
+<para>The step returns a <tag>c:result</tag> element containing one
+<tag>c:line</tag> for each line. Lines are identified as described in
+XML,
+<link xlink:href="http://www.w3.org/TR/xml/#sec-line-ends">2.11 End-of-Line
+Handling</link>.</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> does not exist or
+cannot be read.</entry>
+</row>
+<row>
+<entry><code>err:FU03</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> does not appear to
+be a text file. The exact conditions that constitute “does not appear to be”
+are implementation-defined.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>
+
+<section xml:id="info">
+<title>pxf:info</title>
+
+<para>Returns information about a file or directory.</para>
+
+<p:declare-step type="pxf:info">
+  <p:output port="result" sequence="true"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>The <code>info</code> step returns information about the file or
+directory named in <option>href</option>.</para>
+
+<para>The step
+returns a <tag>c:directory</tag> for directories, a
+<tag>c:file</tag> for ordinary files, or a <tag>c:other</tag> for other
+kinds of filesystem objects. Implementations may also
+return more specific types, for example <tag>c:device</tag>, so anything
+other than <tag>c:directory</tag> or <tag>c:file</tag> must be
+interpreted as “other”.
+If the document doesn't exist, an empty sequence is returned.</para>
+
+<para>The document element of the result, if there is one, will have
+the following attributes:</para>
+
+<informaltable>
+<tgroup cols="3">
+<thead>
+<row>
+<entry>Attribute</entry>
+<entry>Type</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>readable</entry>
+<entry><type>xs:boolean</type></entry>
+<entry>“<literal>true</literal>” if the object is readable.</entry>
+</row>
+<row>
+<entry>writable</entry>
+<entry><type>xs:boolean</type></entry>
+<entry>“<literal>true</literal>” if the object file is writable.</entry>
+</row>
+<row>
+<entry>hidden</entry>
+<entry><type>xs:boolean</type></entry>
+<entry>“<literal>true</literal>” if the object is hidden.</entry>
+</row>
+<row>
+<entry>last-modified</entry>
+<entry><type>xs:dateTime</type></entry>
+<entry>The last modification time of the object expressed in UTC.</entry>
+</row>
+<row>
+<entry>size</entry>
+<entry><type>xs:integer</type></entry>
+<entry>The size of the object in bytes.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+<para>If the value of a particular attribute is unknown or inapplicable
+for the particular kind of object, or in the case
+of boolean attributes, if it's false, then the attribute is not present.
+Additional implementation-defined attributes may be present, but they must
+be in a namespace.</para>
+
+<para>If the <tag class="attribute">href</tag>
+attribute specified is not a <literal>file:</literal>
+URI, then the result is implementation-defined.</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> cannot be read.
+</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</section>
+</section>
+
+<section xml:id="mkdir">
+<title>pxf:mkdir</title>
+
+<para>Creates a directory.</para>
+
+<p:declare-step type="pxf:mkdir">
+  <p:output port="result" primary="false"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>The <code>pxf:mkdir</code> step creates a directory with the
+name in <option>href</option>. If the name
+includes more than one directory component, all of the intermediate
+components are created. The path separator is implementation-defined.
+</para>
+
+<para>The step returns a <tag>c:result</tag> element containing the
+absolute URI of the directory created.</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if the directory named in <option>href</option> cannot be created.
+</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</section>
+</section>
+
+<section xml:id="move">
+<title>pxf:move</title>
+
+<para>Moves (renames) a file or directory.</para>
+
+<p:declare-step type="pxf:move">
+  <p:output port="result" primary="false"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="target" required="true" e:type="xsd:boolean"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>The <code>pxf:move</code> step attempts to move (rename) the
+file specified in the <option>href</option> option to the new name
+specified in the <option>target</option> option.</para>
+
+<para>If the <option>target</option> is a directory, the
+step attempts to move the file into that directory, preserving its
+base name.</para>
+
+<para>If the move is successful, the step returns a
+<tag>c:result</tag> element containing the absolute URI of the
+new name of the file. The original file is effectively removed.
+</para>
+
+<para>If the <option>fail-on-error</option> option is
+<literal>true</literal>, then the step will fail if a file with the
+name specified in the <option>target</option> option already exists,
+or if the file specified in <option>href</option> does not exist or
+cannot be moved.</para>
+
+<para>If the <option>fail-on-error</option> option is
+<literal>false</literal>, the step returns a <tag>c:error</tag>
+element which may contain additional, implementation-defined
+information about the nature of the error.</para>
+
+<para>If the <option>href</option> option specifies a directory, device,
+other special kind of object, the results are
+implementation-defined.</para>
+</section>
+
+<section xml:id="tail">
+<title>pxf:tail</title>
+
+<para>Returns the last few lines of a text file.</para>
+
+<p:declare-step type="pxf:tail">
+  <p:output port="result"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="count" required="true" e:type="xsd:int"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>Returns the last <option>count</option> lines of the file named
+in <option>href</option>. If <option>count</option> is negative, the
+step returns all <emphasis>except</emphasis> those last lines.</para>
+
+<para>The step returns a <tag>c:result</tag> element containing one
+<tag>c:line</tag> for each line. Lines are identified as described in
+XML,
+<link xlink:href="http://www.w3.org/TR/xml/#sec-line-ends">2.11 End-of-Line
+Handling</link>.</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> does not exist or
+cannot be read.</entry>
+</row>
+<row>
+<entry><code>err:FU03</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> does not appear to
+be a text file. The exact conditions that constitute “does not appear to be”
+are implementation-defined.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</section>
+</section>
+
+<section xml:id="tempfile">
+<title>pxf:tempfile</title>
+
+<para>Creates a temporary file.</para>
+
+<p:declare-step type="pxf:tempfile">
+  <p:output port="result" primary="false"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="prefix" e:type="xsd:string"/>
+  <p:option name="suffix" e:type="xsd:string"/>
+  <p:option name="delete-on-exit" e:type="xsd:boolean"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>The <code>pxf:tempfile</code> step creates a temporary file. The
+temporary file is guaranteed not to already exist when
+<code>pxf:tempfile</code> is called.</para>
+
+<para>The file is created in the directory specified by the
+<option>href</option> option. If <option>prefix</option> is specified,
+the file's name will begin with that prefix. If
+<option>suffix</option> is specified, the file's name will end with
+that suffix.</para>
+
+<para>The step returns a <tag>c:result</tag> element containing the
+absolute URI of the temporary file.</para>
+
+<para>If the <option>delete-on-exit</option> option is
+<literal>true</literal>, then the temporary file will automatically be
+deleted when the processor terminates.</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if <option>href</option> does not specify a directory or if the directory
+does not exist.</entry>
+</row>
+<row>
+<entry><code>err:FU04</code></entry>
+<entry>Occurs
+if it is not possible to create a file in the <option>href</option>
+directory.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</section>
+</section>
+
+<section xml:id="touch">
+<title>pxf:touch</title>
+
+<para>Update the modification time of a file.</para>
+
+<p:declare-step type="pxf:touch">
+  <p:output port="result" primary="false"/>
+  <p:option name="href" required="true" e:type="xsd:anyURI"/>
+  <p:option name="timestamp" e:type="xs:dateTime"/>
+  <p:option name="fail-on-error" select="'true'" e:type="xsd:boolean"/>
+</p:declare-step>
+
+<para>The <code>pxf:touch</code> step “touches” the file named in
+<option>href</option>. The file will be created if it does
+not exist.</para>
+
+<para>If <option>timestamp</option> is specified, the modification time of
+the file will be updated to the specified time. If unspecified, the current
+date and time will be used.</para>
+
+<para>The step returns a <tag>c:result</tag> element containing the
+absolute URI of the touched file.</para>
+
+<para>If an error occurs, the step fails if
+<option>fail-on-error</option> is <literal>true</literal>; otherwise,
+the step returns a <tag>c:error</tag> element which may contain
+additional, implementation-defined information about the nature of the
+error.</para>
+
+<section>
+<title>Errors</title>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colnum="1" colwidth="1in"/>
+<thead>
+<row>
+<entry>Error</entry>
+<entry>Description</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><code>err:FU01</code></entry>
+<entry>Occurs
+if the file named in <option>href</option> does not exist or
+if its timestamp cannot be changed.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</section>
+</section>
+</article>

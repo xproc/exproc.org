@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook"
+	 xmlns:xlink="http://www.w3.org/1999/xlink"
+	 xmlns:p="http://www.w3.org/ns/xproc"
+	 xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
+	 xmlns:pxp="http://exproc.org/proposed/steps"
+	 xml:id="proposed.steps.os"
+         version="5.0">
+<info>
+  <title>Proposed OS Utilities</title>
+</info>
+
+<para>This page collects proposed extension steps. Implementation welcome, but
+contents subject to change at any time.</para>
+
+<para>These steps are in the “proposed OS extension namespace”,
+<uri>http://exproc.org/proposed/steps/os</uri>, identified by the prefix
+“<literal>pos</literal>”.</para>
+
+<section xml:id="info">
+<title>pos:info</title>
+
+<para>Returns information about the operating system.
+</para>
+
+<p:declare-step type="pos:info">
+  <p:output port="result"/>
+</p:declare-step>
+
+<para>The <code>pos:info</code> step returns information about the
+operating system on which the processor is running. It returns a
+<tag>c:result</tag> element with attributes describing properties of
+the system. It <emphasis>should</emphasis> include the following
+properties:</para>
+
+<variablelist>
+<varlistentry>
+<term><tag class="attribute">file-separator</tag></term>
+<listitem>
+<para>The file separator; usually “/” on Unix, “\” on Windows.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><tag class="attribute">path-separator</tag></term>
+<listitem>
+<para>The path separator; usually “:” on Unix, “;” on Windows.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><tag class="attribute">os-architecture</tag></term>
+<listitem>
+<para>The operating system architecture, for example “i386”.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><tag class="attribute">os-name</tag></term>
+<listitem>
+<para>The name of the operating system, for example “Mac OS X”.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><tag class="attribute">os-version</tag></term>
+<listitem>
+<para>The version of the operating system, for example “10.5.6”.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><tag class="attribute">cwd</tag></term>
+<listitem>
+<para>The current working directory.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><tag class="attribute">user-name</tag></term>
+<listitem>
+<para>The login name of the effective user, for example “ndw”.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><tag class="attribute">user-home</tag></term>
+<listitem>
+<para>The home diretory of the effective user, for example “/home/ndw”.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para>The exact set of properties returned is
+implementation-dependent.</para>
+
+</section>
+
+<section xml:id="cwd">
+<title>pos:cwd</title>
+
+<para>Returns the current working directory of the processor.</para>
+
+<p:declare-step type="pos:cwd">
+  <p:output port="result" sequence="true"/>
+</p:declare-step>
+
+<para>The <code>pos:cwd</code> step returns a single <tag>c:result</tag>
+containing the current working directory. On systems which have no
+concept of a working directory, this step returns the empty sequence.
+</para>
+
+<para>(This step is exactly duplicates the <tag class="attribute">cwd</tag> attribute on
+the <tag>c:result</tag> from <code>pos:info</code>; it's just for
+convenience.)</para>
+
+</section>
+
+<section xml:id="env">
+<title>pos:env</title>
+
+<para>Returns information about the environment</para>
+
+<p:declare-step type="pos:env">
+  <p:output port="result"/>
+</p:declare-step>
+
+<para>The <code>pos:env</code> step returns information about the
+operating system environment. It returns a <code>c:result</code>
+containing zero or more <tag>c:env</tag> elements. Each
+<tag>c:env</tag> has <tag class="attribute">name</tag> and <tag class="attribute">value</tag>
+attributes containing the name and value of an environment
+variable.</para>
+
+<para>On systems which nave no concept of an environment, this step
+returns an empty <tag>c:result</tag>.</para>
+
+</section>
+</article>
