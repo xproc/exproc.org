@@ -1,5 +1,20 @@
 <git-repo-info xmlns='http://nwalsh.com/ns/git-repo-info' root='/home/travis/build/xproc/exproc.org/'>
 <commit>
+<hash>24586fce0f14915c85c82c764912eebd9fdfa9b6</hash>
+<date>2016-10-18T07:54:55-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Merge pull request #3 from ndw/master</message>
+</commit>
+
+<commit>
+<hash>20c006f06412ba1e747e87f34be618a073f997d0</hash>
+<file>style/webpage.xsl</file>
+<date>2016-10-18T07:50:50-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Port the oXygen web authoring links from xproc.org</message>
+</commit>
+
+<commit>
 <hash>6d4cb3fb2b4360e4e94ea0c020d184488e84e1b7</hash>
 <date>2016-10-02T16:20:28-05:00</date>
 <committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
