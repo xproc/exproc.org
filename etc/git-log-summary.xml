@@ -1,5 +1,23 @@
 <git-repo-info xmlns='http://nwalsh.com/ns/git-repo-info' root='/home/travis/build/xproc/exproc.org/'>
 <commit>
+<hash>18ba1287973e144435e5e551f6f93cf235b9e94f</hash>
+<date>2016-10-18T09:12:10-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Merge pull request #4 from ndw/master</message>
+</commit>
+
+<commit>
+<hash>1435e64efabaf90e4d5f87418b84a62af9c16eed</hash>
+<file>accepted/index.xml</file>
+<file>contact/index.xml</file>
+<file>index.xml</file>
+<file>proposed/functions/index.xml</file>
+<date>2016-10-18T09:08:47-05:00</date>
+<committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
+<message>Whitespace fixup</message>
+</commit>
+
+<commit>
 <hash>24586fce0f14915c85c82c764912eebd9fdfa9b6</hash>
 <date>2016-10-18T07:54:55-05:00</date>
 <committer>Norman Walsh &lt;ndw@nwalsh.com&gt;</committer>
