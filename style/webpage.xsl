@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-		xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:h="http://www.w3.org/1999/xhtml"
-		xmlns:atom="http://www.w3.org/2005/Atom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://www.w3.org/1999/xhtml"
+                xmlns:atom="http://www.w3.org/2005/Atom"
                 xmlns:db="http://docbook.org/ns/docbook"
-		xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:f="http://docbook.org/xslt/ns/extension"
                 xmlns:m="http://docbook.org/xslt/ns/mode"
                 xmlns:r="http://nwalsh.com/ns/git-repo-info"
-		xmlns:t="http://docbook.org/xslt/ns/template"
+                xmlns:t="http://docbook.org/xslt/ns/template"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 exclude-result-prefixes="atom h db dc f m r t xlink xs"
-		version="2.0">
+                version="2.0">
 
 <xsl:import href="../build/docbook/xslt/base/html/final-pass.xsl"/>
 <xsl:include href="xproc.xsl"/>
@@ -36,6 +36,9 @@
 <ln path="address" everyNth="0"/>
 <ln path="epigraph/literallayout" everyNth="0"/>
 </xsl:param>
+
+<xsl:variable name="cwd" select="system-property('user.dir')"/>
+<xsl:variable name="page" select="substring-after(base-uri(/), $cwd)"/>
 
 <xsl:param name="docbook.css" select="'/css/docbook.css'"/>
 
@@ -117,6 +120,13 @@
   <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
     <xsl:apply-templates select="@*,node()" mode="to-xhtml"/>
   </xsl:element>
+</xsl:template>
+
+<xsl:template match="li[not(following-sibling::li) and not(following::li)]" mode="to-xhtml">
+  <xsl:element name="{local-name(.)}" namespace="http://www.w3.org/1999/xhtml">
+    <xsl:apply-templates select="@*,node()" mode="to-xhtml"/>
+  </xsl:element>
+  <li>«<a href="https://www.oxygenxml.com/webapp-demo-aws/app/oxygen.html?url=github://getFileContent/xproc/exproc.org/master{$page}" title="Courtesy of oXygen XML Web Author" target="_blank">Edit this page on GitHub</a>»</li>
 </xsl:template>
 
 <xsl:template match="attribute()|text()|comment()|processing-instruction()" mode="to-xhtml">
